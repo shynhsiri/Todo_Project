@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/morph/bootstrap.min.css"
+    />
+    <title>To-Do</title>
+  </head>
+  <body>
+    <div class="col d-flex justify-content-center" style="margin-top: 10%">
+      <div class="card text-white bg-primary mb-3" style="max-width: 50%">
+        <div class="card-body">
+          <h1 class="col d-flex justify-content-center">To-Do</h1>
+          <form
+            class="col d-flex justify-content-center"
+            action=""
+            method="POST"
+          >
+            {% csrf_token %}
+            <input
+              type="text"
+              class="form-control input-group mb-3"
+              name="title"
+              id="myInput"
+              placeholder="Title"
+            />
+            <button
+              type="submit"
+              class="btn btn-primary"
+              style="margin-left: 8px; height: fit-content; border-radius: 10px"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-plus"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M12 5l0 14" />
+                <path d="M5 12l14 0" />
+              </svg>
+            </button>
+          </form>
+          <ul class="list-group" style="margin-top: 10px">
+            {% for todo in todos reversed %}
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+            >
+              {{todo.title | title}}
+              <span class="badge bg-primary rounded-pill"
+                ><a
+                  style="text-decoration: none; color: white"
+                  href="delete/{{todo.id}}"
+                  ><svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="icon icon-tabler icon-tabler-x"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    stroke-width="2"
+                    stroke="currentColor"
+                    fill="none"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path d="M18 6l-12 12" />
+                    <path d="M6 6l12 12" /></svg></a
+              ></span>
+            </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
